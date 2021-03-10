@@ -7,13 +7,23 @@ function App() {
   const [tasks, setTasks] = useState([]) 
   const [editMode, setEditMode] = useState(false)
   const [id, setId] = useState("")  
+  const [error, setError] = useState(null)  
+
+  const validForm = () => {
+    let isValid = true
+    setError(null)
+    
+    if(isEmpty(task)){
+      console.log("Task Empty")
+      setError("Debes ingresar una tarea...")
+      isValid = false
+    }
+
+    return isValid
+  }
 
   const addTask = (e) => {
     e.preventDefault()
-    if(isEmpty(task)){
-      console.log("Task Empty")
-      return
-    }
     
     const newTask = {
       id: shortid.generate(),
